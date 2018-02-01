@@ -1,0 +1,62 @@
+{% extends 'prod_stat/base.html' %}
+{% block content %}
+    {% load myfilter %}
+    <div class="container">
+        <div class="row">
+            <h1>Ім'я магазину: {{ shop_id }}</h1>
+        </div>
+
+        <div class="row">
+            {% for df in l_df %}
+                <table class="table ftable table-dark">
+                    <thead>
+                    <tr>
+                        <th>Показник</th>
+                        <th>{{ df.0.keys.0 }}</th>
+                        <th>{{ df.0.keys.1 }}</th>
+                        <th>Різниця​​ у​ ​%</th>
+                        <th>Різниця​​</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i, v in df.1 %}
+                        <tr>
+                            <td>{{ i }}</td>
+                            {% for y in v %}
+                                <td>{{ y|floatformat:-2 }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+
+            {% for df in shop_info %}
+                {% if df.2 == 1 %}
+                    <p class="col-12">​​​​Товари,​​які ​​виросли​​ в ​​продажах з {{ df.0.0 }} по {{ df.0.1 }}</p>
+                {% elif df.2 == 0 %}
+                    <p class="col-12">​​​​Товари,​​які впали в ​​продажах з {{ df.0.0 }} по {{ df.0.1 }}</p>
+                {% endif %}
+                <table class="table mytable table-dark">
+                    <thead>
+                    <tr>
+                        <th>Назва товару</th>
+                        <th>Зміна кількості ​​продаж</th>
+                        <th>Зміна обороту</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i, v in df.1 %}
+                        <tr>
+                            <td>{{ i }}</td>
+                            {% for y in v %}
+                                <td>{{ y|floatformat:-4 }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

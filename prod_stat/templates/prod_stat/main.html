@@ -1,0 +1,59 @@
+{% extends 'prod_stat/base.html' %}
+{% block content %}
+    {% load myfilter %}
+    <div class="container">
+        <div class="row">
+            <h1>Інфомація про: {{ client_info.name }}</h1>
+{#            <table class="table table-dark">#}
+                {#                <thead>#}
+                {#                <tr>#}
+                {#                    <th scope="col">#</th>#}
+                {#                    <th scope="col">First</th>#}
+                {#                    <th scope="col">Last</th>#}
+                {#                    <th scope="col">Handle</th>#}
+                {#                </tr>#}
+                {#                </thead>#}
+{#                <tbody>#}
+{#                {% for k, v in client_info.items %}#}
+{#                    <tr>#}
+{#                        <td>{{ k }}</td>#}
+{#                        {% if k == 'shops' %}#}
+{#                            <td>#}
+{#                                {% for key, value in v.items %}#}
+{#                                    <a href="/shop/{{ key }}">{{ value }}</a>#}
+{#                                {% endfor %}#}
+{#                            </td>#}
+{#                        {% else %}#}
+{#                            <td>{{ v }}</td>#}
+{#                        {% endif %}#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{#                </tbody>#}
+{#            </table>#}
+            <table class="table table-dark">
+                <tbody>
+                <tr>
+                    <td>ID клієнта</td>
+                    <td>{{ client_info.id }}</td>
+                </tr>
+                <tr>
+                    <td>Назви магазинів</td>
+                    <td>{% for key, value in client_info.shops.items %}
+                        <a href="/shop/{{ key }}">{{ value }}</a>
+                    {% endfor %}</td>
+                </tr>
+                <tr>
+                    <td>Дата реєстрації першого чека</td>
+                    <td>{{ client_info.date_to }}</td>
+                </tr>
+                <tr>
+                    <td>Дата реєстрації останнього чека</td>
+                    <td>{{ client_info.date_from }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="{% url 'Logout' %}">Вихід</a>
+        </div>
+    </div>
+
+{% endblock %}

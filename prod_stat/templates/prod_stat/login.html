@@ -1,0 +1,16 @@
+{% extends 'prod_stat/base.html' %}
+{% block content %}
+    <div class="container login-page">
+        <div class="row justify-content-center align-items-center login-page-form">
+            <form action="" method="post" class="col-8 col-xs-5 col-md-4">
+                {{ form }}
+                {% csrf_token %}
+                <input type="submit" value="Увійти" class="btn btn-success col-12">
+                {% if error %}
+                <p class="alert alert-warning col-12">{{ error }}</p>
+            {% endif %}
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
