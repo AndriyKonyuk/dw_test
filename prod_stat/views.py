@@ -85,6 +85,8 @@ def market(request, shop_id):
 
 @login_required(login_url='/login/')
 def main(request):
+    # if not request.user.is_authenticated:
+    #     return redirect('/login')
     global dw
     print(dw)
     myd = {}
@@ -97,7 +99,7 @@ def main(request):
 
 def vlogin(request):
     if request.user.is_authenticated:
-        return redirect('/main')
+        return redirect('/')
 
     myd = {}
     myd['form'] = LoginForm()
